@@ -1,0 +1,30 @@
+{% extends 'articles_app/base.html' %}
+
+{% block content %}
+    <h1 style="text-align: center;">Articles</h1>
+    {% if articles %}
+        {% for article in articles %}
+            <article>
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.preview|safe }}</p>
+                <a href="{% url 'articles_app:view_article' article.pk %}">Read</a>
+            </article>
+        {% endfor %}
+    {% else %}
+        <h2>No articles.</h2>
+    {% endif %}
+
+    {% if page_count.stop > 2 %}
+        <div style="text-align: center;">
+            <ul>
+                {% for i in page_count %}
+                    {% if current_page == i %}
+                        <li style="display: inline;"><a style="color: green;" href="{% url 'articles_app:index' %}?page={{ i }}">{{ i }}</a></li>
+                    {% else %}
+                        <li style="display: inline;"><a href="{% url 'articles_app:index' %}?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

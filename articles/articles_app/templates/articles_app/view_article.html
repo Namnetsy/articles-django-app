@@ -1,0 +1,9 @@
+{% extends 'articles_app/base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+    <h1 style="text-align: center;">{{ article.title }}</h1>
+    <article>
+        <p>{{ article.content|safe }}</p>
+    </article>
+{% endblock %}
